@@ -38,11 +38,17 @@ typedef struct s_rules
 
 }	t_rules;
 
-
-int		init_all(t_rules *rules, int argc, char **argv);
+//philo_thread.c 
 void	*philo_thread(void *arg);
-
-
-
-
+void    print_action(t_philo *philo, char *action);
+void    philo_eat(t_philo *philo);
+void    take_forks(t_philo *philo);
+void    put_fork(t_philo *philo);
+void    philo_sleep_think(t_philo *philo);
+long    get_time(void);
+//init_simulation.c
+int	init_philos(t_rules *rules);
+int	init_mutexes(t_rules *rules);
+int parse_args(t_rules *rules, int ac, char **av);
+int	init_all(t_rules *rules, int ac, char **av);
 #endif

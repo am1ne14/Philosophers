@@ -1,16 +1,16 @@
-#include "philo.h"
+#include "inc/philo.h"
 
 int	main(int ac, char **av)
 {
 	t_rules	rules;
 	int	i;
 
-	if (init_all(&rules, argc, argv))
+	if (init_all(&rules, ac, av)) //init al structs 
 		return (1);
 	i = 0;
 	while (i < rules.nb_philo)
 	{
-		if (pthread_create(&rules.philos[i].thread, NULL. philo_thread, &rules.philos[i]))
+		if (pthread_create(&rules.philos[i].thread, NULL, philo_thread, &rules.philos[i]))
 		{
 			printf("Failed to create thread\n");
 			return (1);
