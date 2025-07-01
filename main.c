@@ -1,27 +1,25 @@
-#include "inc/philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-am <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/01 18:10:07 by mohel-am          #+#    #+#             */
+/*   Updated: 2025/07/01 18:10:09 by mohel-am         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
 
 int	main(int ac, char **av)
 {
-	t_rules	rules;
-	int	i;
+	t_table	table;
 
-	if (init_all(&rules, ac, av)) //init al structs 
+	if (init_simulation(ac, av, &table))
 		return (1);
-	i = 0;
-	while (i < rules.nb_philo)
-	{
-		if (pthread_create(&rules.philos[i].thread, NULL, philo_thread, &rules.philos[i]))
-		{
-			printf("Failed to create thread\n");
-			return (1);
-		}
-		i++;
-	}
-	i = 0;
-	while (i < rules.nb_philo)
-	{
-		pthread_join(rules.philos[i].thread, NULL);
-		i++;
-	}
+	if (start_simulation(&table))
+		return (1);
+	//end_simulation(&table);
 	return (0);
 }
