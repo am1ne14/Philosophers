@@ -1,4 +1,4 @@
-#include "inc/philo.h"
+#include "philo.h"
 
 /*
 void	*philo_thread(void *arg);
@@ -18,10 +18,10 @@ void	*philo_thread(void *arg)
     philo = (t_philo *) arg;
     if (philo->id % 2 == 0)
         usleep(200);
-        while(!philo->rules->finished)
+        while(!philo->table->finished)
         {
             philo_eat(philo);
-            if (philo->rules->nb_meals > 0 && philo->meals_eaten >= philo->rules->nb_meals)
+            if (philo->table->nb_meals > 0 && philo->meals_eaten >= philo->table->nb_meals)
                 break;
             philo_sleep_think(philo);
         }
@@ -33,19 +33,19 @@ void    print_action(t_philo *philo, char *action)
 {
     long    time;
 
-    pthread_mutex_lock(&philo->rules->print);
-    time = get_time() -philo->rules->start_time;
+    pthread_mutex_lock(&philo->table->print);
+    time = get_time() -philo->table->start_time;
     printf("%ld %d %s\n", time, philo->id, action);
-    pthread_mutex_unlock(&philo->rules->print);
+    pthread_mutex_unlock(&philo->table->print);
 }
 void    philo_eat(t_philo *philo)
 {
-    take_fork(philo);
-    pthread_mutex_lock(&philo->rules->print);
+    take_forks(philo);
+    pthread_mutex_lock(&philo->table->print);
     philo->last_meal = get_time();
-    pthread_mutex_unlock(&philo->rules->print);
+    pthread_mutex_unlock(&philo->table->print);
     print_action(philo, "is_eating");
-    usleep(philo->rules->time_to_eat * 1000);
+    usleep(philo->table->time_to_eat * 1000);
     philo->meals_eaten++;
     put_fork(philo);
 }
@@ -67,7 +67,7 @@ void    put_fork(t_philo *philo)
 void    philo_sleep_think(t_philo *philo)
 {
     print_action(philo, "is sleeping");
-    usleep(philo->rules->time_to_sleep * 1000);
+    usleep(philo->table->time_to_sleep * 1000);
     print_action(philo, "is thinking");
 }
 
@@ -77,4 +77,11 @@ long    get_time(void)
 
     gettimeofday(&tv, NULL);
     return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));    
+}
+
+
+void	put_forks(t_philo *philo)
+{
+	pthread_mutex_unlock(philo->left_fork);
+	pthread_mutex_unlock(philo->right_fork);
 }

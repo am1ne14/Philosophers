@@ -64,5 +64,11 @@ int		check_all(t_table *table);
 //helpers.c
 void	print_action(t_philo *philo, char *action);
 long	get_time(void);
+void	*philo_thread(void *arg);
+void    print_action(t_philo *philo, char *action);
+void    philo_eat(t_philo *philo);
+void    put_fork(t_philo *philo);
+void    philo_sleep_think(t_philo *philo);
+
 
 #endif

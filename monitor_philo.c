@@ -18,7 +18,7 @@ int check_all(t_table *table);
 
 int	check_death(t_table *table, int i, long now)
 {
-	if ((now - table->philo[i].last_meal) > table->time_to_die)
+	if ((now - table->philo[i].last_meal) >= table->time_to_die)
 	{
 		pthread_mutex_lock(&table->print);
 		printf("%ld %d died\n", now - table->start_time, table->philo[i].id);

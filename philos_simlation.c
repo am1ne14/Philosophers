@@ -14,20 +14,9 @@
 
 /*
 
-Initialize the philosophers and assign their forks.
-
-Create a thread for each philosopher.
-
-Track the simulation start time.
-
-Optionally start a monitor thread to check for deaths or all meals eaten.
-
-*/
-
-/*
-int start_simulation(t_table *table)
-void    *philo_routine(void *arg)
-void    monitor_philos(t_table *table);
+int		start_simulation(t_table *table)
+void	*philo_routine(void *arg)
+void	monitor_philos(t_table *table);
 
 */
 int	start_simulation(t_table *table)
