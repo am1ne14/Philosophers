@@ -39,6 +39,13 @@ int	init_table_mutexes(t_table *table)
 		cleanup_forks(table, table->nb_philos);
 		return (1);
 	}
+	if (pthread_mutex_init(&table->start_mutex, NULL))
+	{
+		pthread_mutex_destroy(&table->print);
+		pthread_mutex_destroy(&table->state_mutex);
+		cleanup_forks(table, table->nb_philos);
+		return (1);
+	}
 	return (0);
 }
 

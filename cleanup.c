@@ -22,6 +22,7 @@ void	cleanup_mutexes(t_table *table)
 {
 	pthread_mutex_destroy(&table->state_mutex);
 	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->start_mutex);
 	cleanup_forks(table, table->nb_philos);
 }
 

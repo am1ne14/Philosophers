@@ -10,19 +10,31 @@ int	parse_args(int ac, char **av, t_table *table)
 {
 	if (ac != 5 && ac != 6)
 		return (1);
-	table->nb_philos = atoi(av[1]);
-	table->time_to_die = atoi(av[2]);
-	table->time_to_eat = atoi(av[3]);
-	table->time_to_sleep = atoi(av[4]);
+	
+	// Validate all arguments are valid numbers
+	if (!is_valid_number(av[1]) || !is_valid_number(av[2]) || 
+		!is_valid_number(av[3]) || !is_valid_number(av[4]))
+		return (1);
+	if (ac == 6 && !is_valid_number(av[5]))
+		return (1);
+	
+	table->nb_philos = ft_atoi(av[1]);
+	table->time_to_die = ft_atoi(av[2]);
+	table->time_to_eat = ft_atoi(av[3]);
+	table->time_to_sleep = ft_atoi(av[4]);
 	if (ac == 6)
-		table->nb_meals = atoi(av[5]);
+		table->nb_meals = ft_atoi(av[5]);
 	else
 		table->nb_meals = -1;
-	if (table->nb_philos < 1 || table->time_to_die < 1
-		|| table->time_to_eat < 1 || table->time_to_sleep < 1
-		|| (ac == 6 && table->nb_meals < 1))
+		
+	// Validate ranges
+	if (table->nb_philos < 1 || table->nb_philos > 200 ||
+		table->time_to_die < 1 || table->time_to_eat < 1 ||
+		table->time_to_sleep < 1 || (ac == 6 && table->nb_meals < 1))
 		return (1);
+		
 	table->finished = 0;
+	table->all_threads_ready = 0;
 	return (0);
 }
 

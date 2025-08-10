@@ -24,12 +24,14 @@ typedef struct s_table
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	state_mutex;
+	pthread_mutex_t	start_mutex;
 	int				nb_philos;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				nb_meals;
 	int				finished;
+	int				all_threads_ready;
 	long			start_time;
 	t_philo			*philo;
 }	t_table;
@@ -66,4 +68,6 @@ long	get_time(void);
 void	print_action(t_philo *philo, const char *action);
 void	print_action_custom(long time, int philo_id, const char *action);
 void	ft_msleep(long time_ms, t_table *table);
+int		ft_atoi(const char *str);
+int		is_valid_number(const char *str);
 #endif

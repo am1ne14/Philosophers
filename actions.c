@@ -65,13 +65,13 @@ void	eat_and_update(t_philo *philo)
 	philo->meals_eaten++;
 	pthread_mutex_unlock(&philo->philo_mutex);
 	print_action(philo, "is eating");
-	ft_msleep(philo->table->time_to_eat, philo->table);
+	usleep(philo->table->time_to_eat * 1000);
 }
 
 void	philo_sleep_think(t_philo *philo)
 {
 	print_action(philo, "is sleeping");
-	ft_msleep(philo->table->time_to_sleep, philo->table);
+	usleep(philo->table->time_to_sleep * 1000);
 	print_action(philo, "is thinking");
 	if (philo->table->nb_philos % 2 != 0 
 		&& philo->table->time_to_eat >= philo->table->time_to_sleep)
