@@ -39,8 +39,8 @@ typedef struct s_table
 void	unlock_forks(t_philo *philo, int *l, int *r);
 void	take_forks(t_philo *philo, int *l, int *r);
 //time_utils.c
-int		take_first_fork(t_philo *philo, pthread_mutex_t *first_fork,
-		int *first_flag);
+int		take_first_fork(t_philo *philo,
+			pthread_mutex_t *first_fork, int *first_flag);
 void	eat_and_update(t_philo *philo);
 void	philo_sleep_think(t_philo *philo);
 long	get_time(void);
@@ -71,7 +71,7 @@ void	*philo_thread(void *arg);
 int		start_simulation(t_table *table);
 //thread_utils.c
 void	set_fork_order(t_philo *philo, pthread_mutex_t **first_fork,
-		pthread_mutex_t **second_fork);
+			pthread_mutex_t **second_fork);
 void	init_philosophers_meal_time(t_table *table);
 int		create_philosopher_threads(t_table *table);
 void	join_philosopher_threads(t_table *table);
@@ -84,8 +84,8 @@ void	ft_msleep(long time_ms, t_table *table);
 int		ft_atoi(const char *str);
 //parse_utils.c
 int		take_second_fork(t_philo *philo, pthread_mutex_t *second_fork,
-		int *second_flag);
+			int *second_flag);
 int		take_first_fork(t_philo *philo, pthread_mutex_t *first_fork,
-		int *first_flag);
+			int *first_flag);
 int		is_valid_number(const char *str);
 #endif
