@@ -45,8 +45,6 @@ void	*philo_thread(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
-	
-	// Wait until all threads are created and ready to start
 	if (p->table->nb_philos == 1)
 	{
 		handle_single_philo(p);
@@ -60,7 +58,6 @@ void	*philo_thread(void *arg)
 		pthread_mutex_lock(&p->table->start_mutex);
 	}
 	pthread_mutex_unlock(&p->table->start_mutex);
-	
 	if (p->id % 2 == 0)
 		usleep(p->table->time_to_eat * 500);
 	philo_routine(p);
@@ -69,41 +66,14 @@ void	*philo_thread(void *arg)
 
 int	start_simulation(t_table *table)
 {
-	int	i;
-	int	err;
-
-	// Set start time BEFORE creating threads
 	table->start_time = get_time();
-	
-	// Initialize last_meal times for all philosophers
-	i = 0;
-	while (i < table->nb_philos)
-	{
-		pthread_mutex_lock(&table->philo[i].philo_mutex);
-		table->philo[i].last_meal = table->start_time;
-		pthread_mutex_unlock(&table->philo[i].philo_mutex);
-		i++;
-	}
-	i = 0;
-	while (i < table->nb_philos)
-	{
-		if (pthread_create(&table->philo[i].thread, NULL,
-				&philo_thread, &table->philo[i]))
-			return (1);
-		i++;
-	}
+	init_philosophers_meal_time(table);
+	if (create_philosopher_threads(table))
+		return (1);
 	pthread_mutex_lock(&table->start_mutex);
 	table->all_threads_ready = 1;
 	pthread_mutex_unlock(&table->start_mutex);
-	
-	err = monitor_philos(table);
-	i = 0;
-	while (i < table->nb_philos)
-	{
-		pthread_join(table->philo[i].thread, NULL);
-		i++;
-	}
-	if (err)
-		return (0);
+	monitor_philos(table);
+	join_philosopher_threads(table);
 	return (0);
 }

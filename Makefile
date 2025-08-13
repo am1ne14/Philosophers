@@ -1,6 +1,6 @@
 CC = cc
 CFLAGS =  -Wall -Wextra -Werror
-SRCS = main.c init_simulation.c monitor_philo.c philos_simulation.c utils.c actions.c cleanup.c init_mutexes.c
+SRCS = main.c init_simulation.c monitor_philo.c philos_simulation.c utils.c actions.c cleanup.c init_mutexes.c time_utils.c thread_utils.c parse_utils.c
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 NAME = philo

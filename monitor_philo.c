@@ -37,7 +37,8 @@ int	check_death(t_table *table, int i)
 		{
 			table->finished = 1;
 			pthread_mutex_lock(&table->print);
-			printf("%ld %d died\n", now - table->start_time, table->philo[i].id);
+			printf("%ld %d died\n", now - table->start_time,
+				table->philo[i].id);
 			pthread_mutex_unlock(&table->print);
 			pthread_mutex_unlock(&table->state_mutex);
 			pthread_mutex_unlock(&table->philo[i].philo_mutex);
@@ -58,7 +59,6 @@ int	check_all_eaten(t_table *table)
 		return (0);
 	}
 	pthread_mutex_unlock(&table->state_mutex);
-	
 	if (are_philos_full(table))
 	{
 		pthread_mutex_lock(&table->state_mutex);

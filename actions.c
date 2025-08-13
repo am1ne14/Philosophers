@@ -1,12 +1,5 @@
 #include "philo.h"
 
-/*
-void	unlock_forks(t_philo *philo, int *l, int *r);
-void	take_forks(t_philo *philo, int *l, int *r);
-void	eat_and_update(t_philo *philo);
-void	philo_sleep_think(t_philo *philo);
- */
-
 void	unlock_forks(t_philo *philo, int *l, int *r)
 {
 	if (*l)
@@ -24,56 +17,19 @@ void	take_forks(t_philo *philo, int *l, int *r)
 	int				*first_flag;
 	int				*second_flag;
 
+	set_fork_order(philo, &first_fork, &second_fork);
 	if (philo->id < ((philo->id % philo->table->nb_philos) + 1))
 	{
-		first_fork = philo->left_fork;
-		second_fork = philo->right_fork;
 		first_flag = l;
 		second_flag = r;
 	}
 	else
 	{
-		first_fork = philo->right_fork;
-		second_fork = philo->left_fork;
 		first_flag = r;
 		second_flag = l;
 	}
-	
-	pthread_mutex_lock(first_fork);
-	*first_flag = 1;
-	if (is_finished(philo))
-	{
+	if (take_first_fork(philo, first_fork, first_flag))
 		unlock_forks(philo, l, r);
-		return ;
-	}
-	print_action(philo, "has taken a fork");
-	
-	pthread_mutex_lock(second_fork);
-	*second_flag = 1;
-	if (is_finished(philo))
-	{
+	else if (take_second_fork(philo, second_fork, second_flag))
 		unlock_forks(philo, l, r);
-		return ;
-	}
-	print_action(philo, "has taken a fork");
-}
-
-void	eat_and_update(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->philo_mutex);
-	philo->last_meal = get_time();
-	philo->meals_eaten++;
-	pthread_mutex_unlock(&philo->philo_mutex);
-	print_action(philo, "is eating");
-	usleep(philo->table->time_to_eat * 1000);
-}
-
-void	philo_sleep_think(t_philo *philo)
-{
-	print_action(philo, "is sleeping");
-	usleep(philo->table->time_to_sleep * 1000);
-	print_action(philo, "is thinking");
-	if (philo->table->nb_philos % 2 != 0 
-		&& philo->table->time_to_eat >= philo->table->time_to_sleep)
-		usleep(philo->table->time_to_eat * 1000);
 }
