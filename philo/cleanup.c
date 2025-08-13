@@ -1,9 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-am <mohel-am@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 22:30:02 by mohel-am          #+#    #+#             */
+/*   Updated: 2025/08/13 22:30:11 by mohel-am         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
-/*
-void	cleanup_forks(t_table *table, int count);
-void	cleanup_mutexes(t_table *table);
-void	cleanup_table(t_table *table);
-*/
 
 void	cleanup_forks(t_table *table, int count)
 {

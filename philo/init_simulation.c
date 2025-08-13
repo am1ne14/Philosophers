@@ -1,10 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_simulation.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-am <mohel-am@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 22:30:30 by mohel-am          #+#    #+#             */
+/*   Updated: 2025/08/13 22:30:36 by mohel-am         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-int	parse_args(int ac, char **av, t_table *table);
-int	init_philos(t_table *table);
-int	init_simulation(int ac, char **av, t_table *table);
-*/
+#include "philo.h"
 
 int	parse_args(int ac, char **av, t_table *table)
 {

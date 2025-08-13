@@ -1,10 +1,16 @@
-#include "philo.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mutexes.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mohel-am <mohel-am@student.1337.ma>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/13 22:30:20 by mohel-am          #+#    #+#             */
+/*   Updated: 2025/08/13 22:30:25 by mohel-am         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-int	init_fork_mutexes(t_table *table);
-int	init_table_mutexes(t_table *table);
-int	init_mutexes(t_table *table);
- */
+#include "philo.h"
 
 int	init_fork_mutexes(t_table *table)
 {
